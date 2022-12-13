@@ -1,0 +1,45 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+availabilityZones:
+- ap-south-1c
+- ap-south-1a
+- ap-south-1b
+
+metadata:
+  name: efs-demo
+  region: ap-south-1
+  version: "1.23"
+
+privateCluster:
+  enabled: false
+  skipEndpointCreation: false
+
+vpc:
+  autoAllocateIPv6: false
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    privateAccess: false
+    publicAccess: true
+  manageSharedNodeSecurityGroupRules: true
+  nat:
+    gateway: Single
+
+managedNodeGroups:
+  - name: ng-1
+    amiFamily: Ubuntu2004
+    instanceType: t3.medium
+    minSize: 1
+    maxSize: 4
+    desiredCapacity: 3
+    volumeSize: 80
+    ssh:
+      allow: true
+      publicKeyPath: dev_iam
+    labels: 
+      alpha.eksctl.io/cluster-name: cluster-name
+      alpha.eksctl.io/nodegroup-name: ng-1
+    tags:
+      nodegroup-role: worker
+      alpha.eksctl.io/nodegroup-name: ng-1
+      alpha.eksctl.io/nodegroup-type: managed

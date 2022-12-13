@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: reactjs
+spec:
+    selector:
+        matchLabels:
+            app: react
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: react
+        spec:
+            containers:
+                - name: reactjs-demo
+                  imagePullPolicy: Always
+                  image: public.ecr.aws/e4j8f4i5/reactjs-todo:latest
+                  ports:
+                      - containerPort: 3000

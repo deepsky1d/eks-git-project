@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nodejs
+spec:
+    selector:
+        matchLabels:
+            app: example
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: example
+        spec:
+            containers:
+                - name: nodejs-demo
+                  imagePullPolicy: Always
+                  image: public.ecr.aws/e4j8f4i5/nodejs-hello-world:latest
+                  ports:
+                      - containerPort: 5000
