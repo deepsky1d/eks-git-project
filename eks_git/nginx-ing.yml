@@ -9,7 +9,7 @@ metadata:
    nginx.org/client-max-body-size: 50m
 spec:
  rules:
-   - host: node.kavandalwadi.tech
+   - host: node.customer1.com
      http:
        paths:
        - backend:
@@ -19,7 +19,7 @@ spec:
                number: 80
          path: /
          pathType: Prefix
-   - host: react.kavandalwadi.tech
+   - host: react.customer2.com
      http:
        paths:
        - backend:
